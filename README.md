@@ -50,3 +50,10 @@ src/
 - Earth textures: derived from the three.js examples (`examples/textures/planets`, MIT). See `src/assets/README.md`.
 - Simplex noise by Ian McEwan and Ashima Arts (MIT).
 - Video soundtrack approach adapted from [latent-spaces/brag](https://github.com/latent-spaces/brag) (MIT).
+
+
+## Contributing
+
+Before opening a pull request, run `npm run typecheck` and `npm run lint`, and make sure `npm run build` completes without errors.
+
+
