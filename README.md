@@ -1,59 +1,369 @@
-# GeoVerse
+# 🌍 GeoVerse
 
-**Explore beyond the surface.** A real-time 3D Earth experience featuring interactive WebGL environments, custom shaders and cinematic motion design.
+<div align="center">
 
-GeoVerse is an independent concept inspired by the name and idea of [globe-jamun.vercel.app](https://globe-jamun.vercel.app/). It is not affiliated with that site and shares none of its code. The Earth is rendered live in the browser from open imagery, and the surrounding worlds are procedural.
+### EXPLORE BEYOND THE SURFACE.
 
-## Features
+**An immersive, real-time 3D Earth experience.**
 
-- **Realistic 3D Earth.** A custom GLSL surface over open Earth imagery: daytime colour with relief from a normal map, sun glint on the oceans (from a water mask), a soft terminator, city lights on the night side, a lit cloud layer that drifts slightly faster than the ground, and a fresnel atmosphere. Drag anywhere to spin it (with inertia), and the camera follows the pointer.
-- **Orbit dock navigation.** A compact command dock with a scroll-progress orbit and one node per section. Keys `1`-`5` jump between sections.
-- **World Explorer.** Five real places (Himalaya, Amazon Basin, Sahara, Great Barrier Reef, Antarctica) at their real coordinates. Choosing one from the list or clicking its marker turns the globe to face you, flies the camera in and lights a focus ring in the shader. Use `<-` `->` to step through them and `Esc` to return to the overview. The notes are short general facts, not live data.
-- **Three environments.** Deep Field (a domain-warped nebula and star field), Orbital Lattice (an illustrative relay network of fibonacci-sphere nodes with pulses on nearest-neighbour links) and Crystal Isles (one instanced draw call of faceted crystals).
-- **Object Lab.** Four globe views (Realistic, Night lights, Atlas, Hologram), three colour themes, key-light direction and intensity, Orbit/Polar/Close-up camera views, toggles for orbit paths and the Moon, a satellite constellation, bloom and auto-rotate, and a reset button. Every control drives real uniforms or scene state. Orbits, satellites and the Moon are illustrative and not to scale.
-- **Scroll choreography.** Normal native scrolling. An IntersectionObserver picks the active section, and the camera and globe ease to each section's pose. Text masks reveal and layers have a little depth parallax.
-- **Cursor and feedback.** A dot-and-ring cursor that changes for links, drag surfaces and place markers (desktop only), magnetic buttons and hover lighting on the surface.
-- **Robustness.** WebGL detection with a static fallback, an error boundary, WebGL context-loss handling, a loader that can't trap the visitor, a render loop that pauses while the tab is hidden, an adaptive pixel ratio that measures real frame times, a lighter quality tier on mobile and low-core devices, and `prefers-reduced-motion` support.
+Travel across a living digital planet, explore extraordinary places, navigate procedural worlds, and interact with a globe powered by custom GLSL shaders and real-time WebGL rendering.
 
-## Stack
+**One planet. Infinite perspectives. A universe to explore.**
 
-Vite 5, React 18, TypeScript, three.js 0.169, React Three Fiber 8, @react-three/postprocessing (bloom) and zustand. There is no GSAP, Framer Motion or Tailwind: native scroll, CSS transitions and a damped per-frame rig cover the motion, which keeps the bundle lean. The three.js scene is lazy-loaded with a dynamic import.
+![Project](https://img.shields.io/badge/PROJECT-INTERACTIVE%203D-2563EB?style=for-the-badge)
+![Framework](https://img.shields.io/badge/FRAMEWORK-REACT%2018-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Language](https://img.shields.io/badge/LANGUAGE-TYPESCRIPT-3178C6?style=for-the-badge&logo=typescript)
+![Graphics](https://img.shields.io/badge/GRAPHICS-WEBGL%20%7C%20GLSL-990000?style=for-the-badge)
 
-## Run it
+[Explore Features](#-key-features) · [World Explorer](#-world-explorer) · [Object Lab](#-object-lab) · [Technology Stack](#-technology-stack) · [Getting Started](#-getting-started)
+
+</div>
+
+---
+
+## 🚀 The Vision
+
+GeoVerse transforms the familiar experience of looking at a globe into an immersive, interactive journey across a living digital planet.
+
+From the atmospheric glow of Earth to the distant stars of a procedural nebula, every scene is designed to combine visual storytelling, real-time graphics, and meaningful interaction.
+
+Explore geographic landmarks, switch between alternate planetary visualizations, discover abstract environments, and control the globe through an interactive 3D laboratory.
+
+**GeoVerse is where geography meets generative worlds, and exploration becomes an experience.**
+
+## ✨ Key Features
+
+### 🌎 1. A Living, Real-Time 3D Earth
+
+Experience a custom-rendered Earth built with three.js, React Three Fiber, and GLSL shaders.
+
+- **Daytime surface:** Open Earth imagery provides the planet's visible surface colors.
+- **Terrain relief:** A normal map adds lighting detail to the surface.
+- **Ocean highlights:** A water mask helps create a subtle sun-glint effect.
+- **Day–night transition:** A soft terminator blends the illuminated and dark sides of the planet.
+- **City lights:** Night-side illumination adds depth to the Earth's dark hemisphere.
+- **Cloud layer:** A separate cloud shell drifts slightly faster than the surface.
+- **Atmospheric scattering effect:** A Fresnel-inspired shader creates a luminous atmospheric rim.
+- **Interactive rotation:** Drag the globe to rotate it with inertial movement.
+- **Pointer-aware camera:** Camera movement responds to pointer position for added depth.
+
+The result is a layered planetary visualization that combines image-based surface detail with procedural lighting and atmospheric effects.
+
+### 🧭 2. Orbit Dock Navigation
+
+Navigate the experience through a compact command dock designed around the idea of orbital movement.
+
+- A circular progress indicator tracks your journey.
+- Each node corresponds to a section of the experience.
+- Keyboard shortcuts let you jump directly between sections.
+- The active section updates as you scroll.
+
+**Keyboard controls:** Press `1`–`5` to jump to the corresponding section.
+
+### 📍 3. World Explorer
+
+Discover five remarkable destinations located at their real-world geographic coordinates.
+
+<grid columns={2} gap={3}>
+  <grid-item>
+    <AsyncImage query="Himalayas snow covered mountain range aerial landscape" aspectRatio="5:4" width="100%"/>
+    **The Himalayas**
+
+    <text color="secondary" size="sm">High-altitude mountain systems and dramatic relief.</text>
+  </grid-item>
+  <grid-item>
+    <AsyncImage query="Amazon Basin dense rainforest aerial river winding through jungle" aspectRatio="5:4" width="100%"/>
+    **The Amazon Basin**
+
+    <text color="secondary" size="sm">Vast tropical forests and interconnected river systems.</text>
+  </grid-item>
+  <grid-item>
+    <AsyncImage query="Sahara desert golden sand dunes aerial landscape" aspectRatio="5:4" width="100%"/>
+    **The Sahara**
+
+    <text color="secondary" size="sm">Expansive desert landscapes across North Africa.</text>
+  </grid-item>
+  <grid-item>
+    <AsyncImage query="Great Barrier Reef turquoise coral reef aerial ocean" aspectRatio="5:4" width="100%"/>
+    **The Great Barrier Reef**
+
+    <text color="secondary" size="sm">A vast coral reef system off northeastern Australia.</text>
+  </grid-item>
+  <grid-item>
+    <AsyncImage query="Antarctica icy continent aerial blue glacial landscape" aspectRatio="5:4" width="100%"/>
+    **Antarctica**
+
+    <text color="secondary" size="sm">A continent of ice, glaciers, and extreme environments.</text>
+  </grid-item>
+</grid>
+
+Each destination can be selected from the explorer list or through its globe marker.
+
+When a destination is selected, GeoVerse:
+
+1. Rotates the Earth to bring the location into view.
+2. Animates the camera toward the selected region.
+3. Illuminates a focus ring through the shader.
+4. Displays a concise informational note.
+
+Use the previous and next controls to move between destinations, or press `Esc` to return to the global overview.
+
+*Destination notes provide general geographic information rather than live environmental or scientific measurements.*
+
+### 🌌 4. Three Procedural Environments
+
+Beyond Earth, GeoVerse opens the door to three distinct visual worlds.
+
+<box gap={3}>
+  <row align="start" gap={3}>
+    <AsyncImage query="deep space purple blue nebula glowing gas clouds dense star field cinematic" aspectRatio="4:5" maxWidth="124px"/>
+    <box flex="1" gap={1}>
+      **Deep Field**
+
+      A procedural cosmic environment featuring a domain-warped nebula, layered star fields, and luminous clouds. Designed to create the feeling of drifting through deep space.
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="abstract orbital satellite network glowing nodes connecting lines against dark space futuristic scientific visualization" aspectRatio="4:5" maxWidth="124px"/>
+    <box flex="1" gap={1}>
+      **Orbital Lattice**
+
+      An illustrative network of nodes distributed across a Fibonacci sphere, connected by pulsing nearest-neighbor links to evoke a futuristic orbital communications system.
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="surreal low poly crystal islands floating in dark ocean faceted translucent geometric crystals cinematic 3d art" aspectRatio="4:5" maxWidth="124px"/>
+    <box flex="1" gap={1}>
+      **Crystal Isles**
+
+      A surreal landscape of faceted crystalline formations, rendered with instanced geometry to create a distinctive procedural world with reduced draw-call overhead.
+    </box>
+  </row>
+</box>
+
+These environments are artistic, procedural visualizations rather than simulations of actual astronomical or satellite systems.
+
+### 🧪 5. Object Lab
+
+The Object Lab turns the Earth into a customizable real-time graphics experience.
+
+**Globe visualization modes**
+
+- Realistic — daytime surface imagery and atmospheric effects.
+- Night Lights — emphasis on illuminated urban regions.
+- Atlas — a map-inspired surface treatment.
+- Hologram — a stylized digital planetary aesthetic.
+
+**Customization controls**
+
+- Three color themes.
+- Adjustable key-light direction and intensity.
+- Orbit, Polar, and Close-up camera views.
+- Toggleable orbital paths and Moon visualization.
+- Illustrative satellite constellation.
+- Bloom effects.
+- Automatic rotation.
+- One-click reset.
+
+Each control is intended to update actual shader uniforms or scene state rather than simply changing decorative interface elements.
+
+*Orbital paths, satellites, and the Moon are illustrative and not represented to scale.*
+
+### 🎥 6. Cinematic Scroll Choreography
+
+GeoVerse combines native browser scrolling with coordinated camera movement.
+
+- Intersection Observer-based active-section tracking.
+- Camera easing between section-specific viewpoints.
+- Layered depth and subtle parallax.
+- Masked text reveals.
+- Responsive framing across screen sizes.
+
+The scrolling experience remains native instead of being replaced by a heavyweight animation framework.
+
+### 🖱️ 7. Interactive Cursor & Feedback
+
+A custom desktop cursor reinforces the sense of interacting directly with the globe.
+
+- Dot-and-ring cursor treatment.
+- Context-sensitive states for links, draggable surfaces, and location markers.
+- Magnetic buttons.
+- Surface hover lighting.
+- Responsive interaction feedback.
+
+Desktop-only cursor effects are kept separate from touch interactions on mobile.
+
+## 🏗️ Technology Stack
+
+| Technology | Role |
+|---|---|
+| Vite 5 | Development server and production bundling |
+| React 18 | Component-based interface |
+| TypeScript | Type-safe application logic |
+| three.js 0.169 | 3D rendering engine |
+| React Three Fiber 8 | Declarative React integration for three.js |
+| @react-three/postprocessing | Post-processing effects, including bloom |
+| GLSL | Custom Earth surface and atmospheric shaders |
+| Zustand | Shared application state |
+| WebGL | Browser-based GPU rendering |
+| Intersection Observer | Scroll-based section detection |
+| Web Audio API | Optional procedural audio, if enabled by the implementation |
+
+GeoVerse deliberately avoids GSAP, Framer Motion, and Tailwind CSS. Native scrolling, CSS transitions, and a damped per-frame camera rig handle the experience's motion without those additional frameworks.
+
+## 🧠 Rendering Architecture
+
+The application is organized around several cooperating systems.
+
+<box border radius="lg" padding={3} gap={2} align="center">
+  <box background="surface-secondary" radius="md" padding={3} width="100%" align="center">
+    **Experience Layer**
+
+    <text color="secondary" size="sm" textAlign="center">Navigation · World Explorer · Object Lab · Story sections</text>
+  </box>
+  <icon name="arrow-down" size="xl" color="secondary"/>
+  <box background="surface" border radius="md" padding={3} width="100%" align="center">
+    **State & Interaction Layer**
+
+    <text color="secondary" size="sm" textAlign="center">Zustand · Camera controls · Keyboard shortcuts · Scroll observer</text>
+  </box>
+  <icon name="arrow-down" size="xl" color="secondary"/>
+  <box background="surface" border radius="md" padding={3} width="100%" align="center">
+    **3D Scene Layer**
+
+    <text color="secondary" size="sm" textAlign="center">React Three Fiber · three.js · Earth · Procedural environments</text>
+  </box>
+  <icon name="arrow-down" size="xl" color="secondary"/>
+  <box background="surface-secondary" radius="md" padding={3} width="100%" align="center">
+    **Graphics Layer**
+
+    <text color="secondary" size="sm" textAlign="center">GLSL shaders · WebGL · Textures · Lighting · Post-processing</text>
+  </box>
+</box>
+
+The three-dimensional scene is lazy-loaded through a dynamic import. User-interface controls communicate with the scene through application state and shader uniforms.
+
+## ⚡ Performance & Reliability
+
+GeoVerse is designed to remain usable across different hardware capabilities.
+
+- **Adaptive rendering quality:** Pixel ratio adjusts according to measured frame times.
+- **Mobile quality tier:** Lower-cost settings for phones and lower-core devices.
+- **Visibility-aware rendering:** The render loop pauses when the browser tab is hidden.
+- **Lazy loading:** The 3D scene is loaded dynamically.
+- **WebGL detection:** A static fallback is provided when graphics support is unavailable.
+- **Error boundary:** Rendering failures are handled without unnecessarily breaking the entire interface.
+- **Context-loss handling:** The application accounts for WebGL context-loss events.
+- **Recoverable loading:** The loader is designed not to trap users indefinitely.
+- **Reduced-motion support:** Respects `prefers-reduced-motion` and reduces motion where appropriate.
+
+These measures aim to balance visual fidelity, responsiveness, and resilience rather than assume every device can render the same effects at the same quality.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js compatible with the project dependencies.
+- npm.
+- A modern browser with WebGL support for the interactive globe.
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <YOUR_REPOSITORY_URL>
+
+# Navigate to the project directory
+cd <YOUR_PROJECT_DIRECTORY>
+
+# Install dependencies
 npm install
-npm run dev        # http://localhost:5173
+
+# Start the development server
+npm run dev
+```
+
+Open the URL displayed in the terminal. The configured Vite development server uses `http://localhost:5173` by default.
+
+### Available Commands
+
+```bash
+npm run dev
 npm run typecheck
 npm run lint
-npm run build && npm run preview
+npm run build
+npm run preview
 ```
 
-Screenshot tour (needs a Chromium build): `CHROME=/path/to/chrome node scripts/shots.mjs http://localhost:5173/ screenshots`.
+- `dev` starts the local development server.
+- `typecheck` runs the configured TypeScript checks.
+- `lint` checks the codebase using the configured linting tools.
+- `build` generates the production bundle.
+- `preview` serves the production build locally.
 
-Demo video: `node scripts/record.mjs "http://localhost:5173/?capture" frames` captures frame-accurate PNGs (the `?capture` flag hands the render clock to the recorder), then `video/build.sh frames demo.mp4` encodes them with a closing card and an ffmpeg-synthesised soundtrack.
+### 📸 Capture Screenshots
 
-## Structure
+Capture a visual tour using a compatible Chromium installation:
 
+```bash
+CHROME=/path/to/chrome node scripts/shots.mjs \
+  http://localhost:5173/ screenshots
 ```
-src/
-  lib/        content (regions, environments, presets), shared per-frame rig, DOM hooks
-  store/      zustand world state (section, region, environment, lab)
-  scene/      Canvas setup, World choreography, Planet, Orbitals, poses, lighting
-    shaders/    simplex noise, planet + atmosphere, ring, dust, crystals, lattice, nebula
-    environments/  CrystalIsles, OrbitalLattice, DeepField
-  ui/         HUD, OrbitDock, Cursor, overlays, sections/
+
+The development server must be running if the script targets the local application.
+
+### 🎞️ Generate a Demo Video
+
+The capture workflow can generate frame-accurate PNG sequences using a dedicated capture mode.
+
+```bash
+node scripts/record.mjs \
+  "http://localhost:5173/?capture" frames
 ```
 
-## Credits
+Then encode the captured frames:
 
-- Earth textures: derived from the three.js examples (`examples/textures/planets`, MIT). See `src/assets/README.md`.
-- Simplex noise by Ian McEwan and Ashima Arts (MIT).
-- Video soundtrack approach adapted from [latent-spaces/brag](https://github.com/latent-spaces/brag) (MIT).
+```bash
+video/build.sh frames demo.mp4
+```
 
+The documented workflow adds a closing card and an FFmpeg-generated soundtrack. It requires the relevant capture scripts, a compatible Chromium build, and FFmpeg to be installed and configured.
 
-## Contributing
+## 🗺️ Roadmap
 
-Before opening a pull request, run `npm run typecheck` and `npm run lint`, and make sure `npm run build` completes without errors.
+- [ ] Expand the destination library with additional geographic landmarks.
+- [ ] Add more planetary visualization modes.
+- [ ] Improve shader quality and atmospheric effects.
+- [ ] Introduce additional procedural environments.
+- [ ] Refine accessibility and keyboard navigation.
+- [ ] Improve low-end-device rendering quality.
+- [ ] Add optional shareable exploration states.
+- [ ] Expand automated browser and visual regression testing.
 
+## ⚠️ Project Scope & Disclaimer
 
+GeoVerse is an independent creative and technical project inspired by the concept of exploring a digital globe. It is not affiliated with, endorsed by, or sponsored by the referenced website or any geographic imagery provider.
+
+The globe is rendered in real time using open imagery and procedural graphics. Satellite formations, orbital paths, and environmental scenes are illustrative visualizations rather than authoritative scientific simulations.
+
+Imagery remains subject to its respective provider's license and attribution requirements.
+
+## 👨‍💻 Built by Vicky
+
+Created by [@Vicky-45-11](https://github.com/Vicky-45-11).
+
+A project exploring the intersection of computer graphics, interactive 3D environments, procedural generation, and creative software engineering.
+
+---
+
+<div align="center">
+
+### 🌍 GeoVerse
+
+**Explore beyond the surface.**
+
+*Look closer. Travel further. See the world differently.*
+
+</div>
